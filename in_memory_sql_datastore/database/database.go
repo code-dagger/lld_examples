@@ -10,6 +10,12 @@ type database struct {
 	dbLock *sync.RWMutex
 }
 
+func newDatabase() *database {
+	return &database{
+		tables: make(map[string]*Table),
+	}
+}
+
 func (d *database) createTable(name string, columnList []Column) error {
 	d.dbLock.Lock()
 	defer d.dbLock.Unlock()
