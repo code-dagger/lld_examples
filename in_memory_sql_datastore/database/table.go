@@ -42,7 +42,7 @@ func (t *Table) validateValues(values []string) error {
 	return nil
 }
 
-func (t *Table) InsertRow(values []string) (int, error) {
+func (t *Table) insertRow(values []string) (int, error) {
 	// acquiring lock
 	t.tableLock.Lock()
 	defer t.tableLock.Unlock()
@@ -93,7 +93,7 @@ func (t *Table) InsertRow(values []string) (int, error) {
 	return t.LastInsertID, nil
 }
 
-func (t *Table) UpdateRow(rowId int, updates map[string]string) error {
+func (t *Table) updateRow(rowId int, updates map[string]string) error {
 	// acquiring lock
 	t.tableLock.Lock()
 	defer t.tableLock.Unlock()
@@ -150,7 +150,7 @@ func (t *Table) UpdateRow(rowId int, updates map[string]string) error {
 	return nil
 }
 
-func (t *Table) DeleteRows(deleteBy map[string]string) int {
+func (t *Table) deleteRows(deleteBy map[string]string) int {
 	t.tableLock.Lock()
 	defer t.tableLock.Unlock()
 
@@ -217,7 +217,7 @@ func (t *Table) searchInData(column, value string) []Row {
 	return result
 }
 
-func (t *Table) ReadRows(findBy map[string]string) []Row {
+func (t *Table) readRows(findBy map[string]string) []Row {
 	t.tableLock.RLock()
 	defer t.tableLock.Unlock()
 
@@ -235,7 +235,7 @@ func (t *Table) ReadRows(findBy map[string]string) []Row {
 	return nil
 }
 
-func (t *Table) CreateIndex(column string) error {
+func (t *Table) createIndex(column string) error {
 	t.tableLock.Lock()
 	defer t.tableLock.Unlock()
 
